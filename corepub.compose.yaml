@@ -15,6 +15,7 @@ services:
     environment:
       - DOMAINS=scorchthinks.dev,port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
       - PROXIED=true
+      - IP6_PROVIDER=none
 
   cloudflare-ddns-joshwel:
     container_name: ddns-joshwel
@@ -32,6 +33,7 @@ services:
     environment:
       - DOMAINS=forge.joshwel.co
       - PROXIED=!is(forge.joshwel.co)
+      - IP6_PROVIDER=none
 
   caddy:
     container_name: proxy
