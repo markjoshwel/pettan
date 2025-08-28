@@ -1,0 +1,61 @@
+services:
+  cloudflare-ddns-scorch:
+    container_name: ddns-scorch
+    image: favonia/cloudflare-ddns:latest
+
+    network_mode: host
+    user: "1000:1000"
+
+    # hardening
+    read_only: true  # readonly fs
+    cap_drop: [all]  # drop linux capabilities
+    security_opt: [no-new-privileges:true]  # restrict superuser privileges
+
+    volumes:
+      - /mnt/md0/ddns/token.scorchthinks.dev:/etc/ddns-token
+    environment:
+      - CLOUDFLARE_API_TOKEN_FILE=/etc/ddns-token
+      - DOMAINS=scorchthinks.dev,port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
+      - PROXIED=true
+
+  cloudflare-ddns-joshwel:
+    container_name: ddns-joshwel
+    image: favonia/cloudflare-ddns:latest
+
+    network_mode: host
+    user: "1000:1000"
+
+    # hardening
+    read_only: true  # readonly fs
+    cap_drop: [all]  # drop linux capabilities
+    security_opt: [no-new-privileges:true]  # restrict superuser privileges
+
+    volumes:
+      - /mnt/md0/ddns/token.joshwel.co:/etc/ddns-token
+    environment:
+      - CLOUDFLARE_API_TOKEN_FILE=/etc/ddns-token
+      - DOMAINS=forge.joshwel.co
+      - PROXIED=!is(forge.joshwel.co)
+
+  caddy:
+    container_name: proxy
+    image: iarekylew00t/caddy-cloudflare:latest
+    restart: unless-stopped
+    ports:
+      - "7080:80"
+      - "7443:443"
+      - "7443:443/udp"
+    volumes:
+      - /mnt/md0/caddy/site:/srv
+      - /mnt/md0/caddy/data:/data
+      - /mnt/md0/caddy/config:/config
+      - /mnt/md0/caddy/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - caddy
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  caddy:
