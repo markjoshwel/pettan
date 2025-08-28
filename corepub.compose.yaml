@@ -40,9 +40,9 @@ services:
     image: iarekylew00t/caddy-cloudflare:latest
     restart: unless-stopped
     ports:
-      - "7080:80"
-      - "7443:443"
-      - "7443:443/udp"
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
       - /mnt/md0/caddy/site:/srv
       - /mnt/md0/caddy/data:/data
