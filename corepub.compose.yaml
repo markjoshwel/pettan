@@ -50,6 +50,11 @@ services:
       - /mnt/md0/caddy/data:/data
       - /mnt/md0/caddy/config:/config
       - /mnt/md0/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /mnt/md0/ddns/token.scorchthinks.dev:/etc/token.scorchthinks.dev
+      - /mnt/md0/ddns/token.joswhel.co:/etc/token.joswhel.co
+    environment:
+      - CLOUDFLARE_API_TOKEN_SCORCH=$(cat /etc/token.scorchthinks.dev)
+      - CLOUDFLARE_API_TOKEN_JOSHWEL=$(cat /etc/token.joswhel.co)
     networks:
       - caddy
 
