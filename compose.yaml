@@ -1,0 +1,12 @@
+services:
+  portainer:
+    container_name: portainer
+    image: 'portainer/portainer-ce:alpine-sts'
+    ports:
+      - 9443:9443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /run/user/1000/docker.sock:/var/run/docker.sock:ro
+      - /run/user/1000/docker.sock:/run/user/1000/docker.sock:ro
+      - /mnt/md0/.env:/etc/.env:ro
+      - ./data:/data
