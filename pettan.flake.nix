@@ -90,54 +90,24 @@
 
             # docker
             virtualisation.docker.enable = true;
-            virtualisation.docker = {
-              rootless = {
-                enable = true;
-                setSocketVariable = true;
-                daemon.settings.log-driver = "journald";
-              };
-            };
-            security.wrappers = {
-              docker-rootlesskit = {
-                owner = "root";
-                group = "root";
-                capabilities = "cap_net_bind_service+ep";
-                source = "${pkgs.rootlesskit}/bin/rootlesskit";
-              };
+            virtualisation.docker.daemon.settings = {
+              log-driver = "journald";
+              data-root = "/mnt/md0/docker";
             };
 
-            # networking (wan, not lan)
-            # 0-1023 unavail because we're using rootless docker
-            networking.firewall.enable = true;
-            networking.firewall.allowedTCPPorts = [
-              # 80, 443    - caddy redirected from docker
-              # 7080, 7443 - caddy in docker original port
-              80
-              443
-              7080
-              7443
-              25565 # minenhandwerkerwelt
-              # 22 # ssh
-              # 9443 # portainer
-            ];
-            networking.firewall.allowedUDPPorts = [
-              # quic/http3 (docker redirect, original port)
-              443
-              7443
-              6881 # m1 please bro i torrent linux isos oni bro
-              # 19132  # minenhandwerkerwelt bedrock
-              # 1900   # ssdp/upnp
-              # 7359   # jellyfin dlna (m1 please bro its my school videos bro)
-            ];
-            networking.firewall.extraCommands = ''
-              iptables -A PREROUTING -t nat -i eth0 -p TCP --dport 80 -j REDIRECT --to-port 7080
-              iptables -A PREROUTING -t nat -i eth0 -p TCP --dport 443 -j REDIRECT --to-port 7443
-              iptables -A PREROUTING -t nat -i eth0 -p UDP --dport 443 -j REDIRECT --to-port 7443
-              iptables -A PREROUTING -t nat -i eth0 -p TCP --dport 53 -j REDIRECT --to-port 7053
-              iptables -A PREROUTING -t nat -i eth0 -p UDP --dport 53 -j REDIRECT --to-port 7053
-            '';
-            boot.kernel.sysctl = {
-              "net.ipv4.conf.eth0.forwarding" = 1; # enable
+            systemd.services.start-pettan-docker = {
+              description = "start pettan docker";
+              wants = [ "docker.service" ];
+              after = [ "docker.service" ];
+              serviceConfig = {
+                Type = "simple";
+                WorkingDirectory = "/mnt/md0";
+                ExecStart = "${pkgs.docker-compose}/bin/docker-compose up";
+                Restart = "always";
+                User = "poisson";
+                Group = "docker";
+              };
+              wantedBy = [ "multi-user.target" ];
             };
 
             # no wireless networking; this is a server
