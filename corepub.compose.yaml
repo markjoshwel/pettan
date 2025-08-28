@@ -11,10 +11,8 @@ services:
     cap_drop: [all]  # drop linux capabilities
     security_opt: [no-new-privileges:true]  # restrict superuser privileges
 
-    volumes:
-      - /mnt/md0/ddns/token.scorchthinks.dev:/etc/ddns-token
     environment:
-      - CLOUDFLARE_API_TOKEN_FILE=/etc/ddns-token
+      - CLOUDFLARE_API_TOKEN_FILE=${SS_CLOUDFLARE_API_TOKEN_SCORCH}
       - DOMAINS=scorchthinks.dev,port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
       - PROXIED=true
 
@@ -30,10 +28,8 @@ services:
     cap_drop: [all]  # drop linux capabilities
     security_opt: [no-new-privileges:true]  # restrict superuser privileges
 
-    volumes:
-      - /mnt/md0/ddns/token.joshwel.co:/etc/ddns-token
     environment:
-      - CLOUDFLARE_API_TOKEN_FILE=/etc/ddns-token
+      - CLOUDFLARE_API_TOKEN_FILE=${SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
       - DOMAINS=forge.joshwel.co
       - PROXIED=!is(forge.joshwel.co)
 
@@ -50,13 +46,11 @@ services:
       - /mnt/md0/caddy/data:/data
       - /mnt/md0/caddy/config:/config
       - /mnt/md0/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - /mnt/md0/ddns/token.scorchthinks.dev:/etc/token.scorchthinks.dev
-      - /mnt/md0/ddns/token.joswhel.co:/etc/token.joswhel.co
-    environment:
-      - CLOUDFLARE_API_TOKEN_SCORCH=$(cat /etc/token.scorchthinks.dev)
-      - CLOUDFLARE_API_TOKEN_JOSHWEL=$(cat /etc/token.joswhel.co)
     networks:
       - caddy
+    environment:
+      - SS_CLOUDFLARE_API_TOKEN_SCORCH=${SS_CLOUDFLARE_API_TOKEN_SCORCH}
+      - SS_CLOUDFLARE_API_TOKEN_JOSHWEL=${SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
 
 volumes:
   caddy_data:
