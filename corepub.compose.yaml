@@ -49,12 +49,3 @@ services:
       - /mnt/md0/caddy/config:/config
       - /mnt/md0/caddy/Caddyfile:/etc/caddy/Caddyfile
     env_file: /etc/.env/caddy
-    networks:
-      - caddy
-
-volumes:
-  caddy_data:
-  caddy_config:
-
-networks:
-  caddy:
