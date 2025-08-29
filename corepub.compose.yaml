@@ -31,7 +31,7 @@ services:
 
     env_file: /etc/.env/ddns-joshwel
     environment:
-      - DOMAINS=forge.joshwel.co
+      - DOMAINS=forge.joshwel.co,lo.joshwel.co
       - PROXIED=!is(forge.joshwel.co)
       - IP6_PROVIDER=none
 
