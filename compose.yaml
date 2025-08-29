@@ -5,8 +5,7 @@ services:
     ports:
       - 9443:9443
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /run/user/1000/docker.sock:/var/run/docker.sock:ro
-      - /run/user/1000/docker.sock:/run/user/1000/docker.sock:ro
       - /mnt/md0/env:/etc/.env:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data:/data
