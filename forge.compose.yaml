@@ -1,7 +1,7 @@
 services:
-  forge:
+  forgejo:
     image: codeberg.org/forgejo/forgejo:11
-    container_name: forge
+    container_name: forgejo
     env_file: /etc/.env/forge
     environment:
       - USER_UID=1000
