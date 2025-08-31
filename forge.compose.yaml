@@ -7,7 +7,7 @@ services:
       - USER_UID=1000
       - USER_GID=1000
       - FORGEJO__database__DB_TYPE=mysql
-      - FORGEJO__database__HOST=db:3306
+      - FORGEJO__database__HOST=forgedb:3306
       - FORGEJO__database__NAME=forgejodb
       - FORGEJO__database__USER=forgejo
       - TZ='Asia/Singapore'
@@ -39,4 +39,4 @@ services:
 
 networks:
   forgenet:
-    external: true
+    external: false
