@@ -1,0 +1,42 @@
+services:
+  forge:
+    image: codeberg.org/forgejo/forgejo:11
+    container_name: forge
+    env_file: /etc/.env/forge
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__database__DB_TYPE=mysql
+      - FORGEJO__database__HOST=db:3306
+      - FORGEJO__database__NAME=forgejodb
+      - FORGEJO__database__USER=forgejo
+      - TZ='Asia/Singapore'
+    restart: always
+    networks:
+      - forgenet
+    ports:
+      - '3000:3000'
+    volumes:
+      - /mnt/md0/forge/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - forgedb
+
+  forgedb:
+    image: mariadb
+    container_name: forgedb
+    restart: always
+    env_file: /etc/.env/forge
+    environment:
+      - MARIADB_DATABASE=forgejodb
+      - MARIADB_USER=forgejo
+      - TZ='Asia/Singapore'
+    networks:
+      - forgenet
+    volumes:
+      - /mnt/md0/forge/db:/var/lib/mysql
+
+networks:
+  forgenet:
+    external: true
