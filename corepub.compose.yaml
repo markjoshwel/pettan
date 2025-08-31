@@ -2,6 +2,7 @@ services:
   cloudflare-ddns-scorch:
     container_name: ddns-scorch
     image: favonia/cloudflare-ddns:latest
+    restart: always
 
     network_mode: host
     user: "1000:1000"
@@ -20,6 +21,7 @@ services:
   cloudflare-ddns-joshwel:
     container_name: ddns-joshwel
     image: favonia/cloudflare-ddns:latest
+    restart: always
 
     network_mode: host
     user: "1000:1000"
@@ -38,7 +40,7 @@ services:
   caddy:
     container_name: proxy
     image: iarekylew00t/caddy-cloudflare:latest
-    restart: unless-stopped
+    restart: always
     ports:
       - "80:80"
       - "443:443"
