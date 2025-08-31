@@ -14,7 +14,7 @@ services:
 
     env_file: /etc/.env/ddns-scorchthinks
     environment:
-      - DOMAINS=scorchthinks.dev,port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
+      - DOMAINS=port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
       - PROXIED=true
       - IP6_PROVIDER=none
 
