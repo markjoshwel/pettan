@@ -1,9 +1,9 @@
 services:
   portainer:
     container_name: portainer
-    image: 'portainer/portainer-ce:alpine-sts'
+    image: 'portainer/portainer-ce:latest'
     ports:
-      - 9443:9443
+      - 9000:9000
     volumes:
       - /mnt/md0/env:/etc/.env:ro
       - /etc/localtime:/etc/localtime:ro
