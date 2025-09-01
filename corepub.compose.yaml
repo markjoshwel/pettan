@@ -14,7 +14,7 @@ services:
 
     env_file: /etc/.env/ddns-scorchthinks
     environment:
-      - DOMAINS=port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,fs.scorchthinks.dev,status.scorchthinks.dev
+      - DOMAINS=port.scorchthinks.dev,i.scorchthinks.dev,cmm.scorchthinks.dev,l.scorchthinks.dev,watch.scorchthinks.dev,arr1.scorchthinks.dev,arr2.scorchthinks.dev,arr3.scorchthinks.dev,arr4.scorchthinks.dev,status.scorchthinks.dev
       - PROXIED=true
       - IP6_PROVIDER=none
 
@@ -33,7 +33,7 @@ services:
 
     env_file: /etc/.env/ddns-joshwel
     environment:
-      - DOMAINS=forge.joshwel.co,lo.joshwel.co,tower.joshwel.co
+      - DOMAINS=forge.joshwel.co,lo.joshwel.co,data.joshwel.co
       - PROXIED=!is(forge.joshwel.co)
       - IP6_PROVIDER=none
 
