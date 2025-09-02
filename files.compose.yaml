@@ -11,7 +11,7 @@ services:
       PROXY_ENABLE_BASIC_AUTH: "true"
       OCIS_INSECURE: "false"
       OCIS_URL: "https://data.joshwel.co"
-      OCIS_LOG_LEVEL: info
+      OCIS_LOG_LEVEL: error
     ports:
       - 9200:9200
     volumes:
