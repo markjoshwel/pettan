@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  ocis:
+    image: owncloud/ocis:latest@sha256:6523a2ab661dde2521615289207d98731746ed20411d11c0ef97df444864308b
+    container_name: ocis
+    restart: unless-stopped
+    logging:
+      driver: local
+    environment:
+      PROXY_ENABLE_BASIC_AUTH: "true"
+      OCIS_INSECURE: "false"
+      OCIS_URL: "https://data.joshwel.co"
+      OCIS_LOG_LEVEL: info
+    ports:
+      - 9200:9200
+    volumes:
+      - "/mnt/md0/ocis/ocis.yaml:/etc/ocis/ocis.yaml"
+      - "ocis-data:/var/lib/ocis"
+
+volumes:
+  ocis-data:
