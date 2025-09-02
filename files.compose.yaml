@@ -4,7 +4,7 @@ services:
   ocis:
     image: owncloud/ocis:latest@sha256:6523a2ab661dde2521615289207d98731746ed20411d11c0ef97df444864308b
     container_name: ocis
-    restart: unless-stopped
+    restart: always
     logging:
       driver: local
     environment:
