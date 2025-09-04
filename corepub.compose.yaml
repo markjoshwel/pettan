@@ -11,11 +11,7 @@ services:
     read_only: true  # readonly fs
     cap_drop: [all]  # drop linux capabilities
     security_opt: [no-new-privileges:true]  # restrict superuser privileges
-
     env_file: /etc/.env/ddns-scorchthinks
-    environment:
-      - PROXIED=true
-      - IP6_PROVIDER=none
 
   cloudflare-ddns-joshwel:
     container_name: ddns-joshwel
@@ -29,11 +25,7 @@ services:
     read_only: true  # readonly fs
     cap_drop: [all]  # drop linux capabilities
     security_opt: [no-new-privileges:true]  # restrict superuser privileges
-
     env_file: /etc/.env/ddns-joshwel
-    environment:
-      - PROXIED=!is(forge.joshwel.co)
-      - IP6_PROVIDER=none
 
   caddy:
     container_name: proxy
