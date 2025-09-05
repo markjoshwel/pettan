@@ -41,7 +41,7 @@ services:
     volumes:
       - model-cache:/cache
     env_file:
-      - stack.env
+      - /etc/.env/immich
     restart: always
     healthcheck:
       disable: false
