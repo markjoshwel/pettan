@@ -1,0 +1,17 @@
+services:  
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    volumes:
+      - "/mnt/md0/datashower:/data"
+    ports:
+      - "7423:9000"
+      - "7424:7424"
+    restart: always      
+    env_file: /etc/.env/minio
+    command: server /data --console-address :7424
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
