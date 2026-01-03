@@ -2,7 +2,7 @@
 {
   description = "poissonparler server";
 
-  inputs = { nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05"; };
+  inputs = { nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11"; };
 
   outputs = inputs@{ self, nixpkgs-stable, ... }:
     let
@@ -46,6 +46,29 @@
               # we are a server
               docker
               docker-compose
+              
+              # fs tools
+              smartmontools     # disk health (smartctl)
+              lsof              # list open files
+              
+              # net tools
+              tcpdump           # packet capture
+              mtr               # network diagnostic
+              nmap              # network scanning
+              
+              # sys tools
+              sysstat           # iostat, mpstat, sar
+              iotop-c           # io monitoring
+              iftop             # network bandwidth
+              btop              # modern htop alternative
+              ncdu              # disk usage analyzer
+              tmux              # terminal multiplexer
+              tree              # directory tree viewer
+              ripgrep           # fast grep
+              fd                # fast find
+              duf               # modern df alternative
+              ctop              # container monitoring
+              dive              # docker image analysis
             ];
 
             # ssh
