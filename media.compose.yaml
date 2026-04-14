@@ -67,7 +67,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /mnt/md0/watch/config/qbittorrent:/config
-      - /mnt/md0/watch/data/tor:/downloads
+      - /mnt/md0/watch/data/tor:/data
       - /mnt/md0/watch/data/watch:/watch
     ports:
       - 8080:8080
