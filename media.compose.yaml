@@ -50,8 +50,7 @@ services:
       - TZ=Asia/Singapore
     volumes:
       - /mnt/md0/watch/config/bazarr:/config
-      - /mnt/md0/watch/data/media/movies:/movies
-      - /mnt/md0/watch/data/media/tv:/tv
+      - /mnt/md0/watch/data:/data
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -67,7 +66,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /mnt/md0/watch/config/qbittorrent:/config
-      - /mnt/md0/watch/data/tor:/data
+      - /mnt/md0/watch/data/tor:/data/tor
       - /mnt/md0/watch/data/watch:/watch
     ports:
       - 8080:8080
@@ -84,7 +83,7 @@ services:
       - TZ=Asia/Singapore
     volumes:
       - /mnt/md0/watch/config/jellyfin:/config
-      - /mnt/md0/watch/data/media:/data
+      - /mnt/md0/watch/data/media:/data/media
     ports:
       - 8096:8096
       - 8920:8920 #optional
