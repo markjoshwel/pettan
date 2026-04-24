@@ -67,7 +67,6 @@ services:
     volumes:
       - /mnt/md0/watch/config/qbittorrent:/config
       - /mnt/md0/watch/data/tor:/data/tor
-      - /mnt/md0/watch/data/watch:/watch
     ports:
       - 8080:8080
       - 6881:6881
