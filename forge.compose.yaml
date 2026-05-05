@@ -1,6 +1,6 @@
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:14
+    image: codeberg.org/forgejo/forgejo:15
     container_name: forgejo
     env_file: /etc/.env/forge
     environment:
