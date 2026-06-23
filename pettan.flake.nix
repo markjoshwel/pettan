@@ -142,11 +142,6 @@
             system.stateVersion =
               "25.05"; # dangerous, https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
           }
-
-          ({ config, ... }: {
-            environment.etc.".env".source =
-              config.lib.file.mkOutOfStoreSymlink "/pettan/env";
-          })
         ];
       };
     };
