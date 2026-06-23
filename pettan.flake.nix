@@ -1,5 +1,5 @@
-# admonition: /etc/nixos/flake.nix should be a symlink to this file.
-# Do not hardlink Git-managed files; Git checkouts can replace the inode.
+# admonition: /etc/nixos/flake.nix is hardlinked to this file.
+# Git operations can replace this inode; verify and repair the hardlink after pulls/checkouts.
 {
   description = "poissonparler server";
 
