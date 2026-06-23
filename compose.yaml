@@ -1,11 +1,12 @@
 services:
   portainer:
     container_name: portainer
-    image: 'portainer/portainer-ce:latest'
+    image: 'portainer/portainer-ee:latest'
     ports:
       - 9000:9000
+      - 9443:9443
     volumes:
-      - /mnt/md0/env:/etc/.env:ro
+      - /pettan/env:/etc/.env:ro
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data:/data
+      - /pettan/data/portainer:/data

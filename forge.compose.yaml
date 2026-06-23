@@ -18,6 +18,7 @@ services:
       - '3000:3000'
     volumes:
       - /mnt/md0/forge/data:/data
+      - /pettan/cache/forgejo-tmp:/tmp
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     depends_on:
@@ -35,7 +36,7 @@ services:
     networks:
       - forgenet
     volumes:
-      - /mnt/md0/forge/db:/var/lib/mysql
+      - /pettan/data/forgejo-mariadb:/var/lib/mysql
 
 networks:
   forgenet:

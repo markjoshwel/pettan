@@ -38,7 +38,7 @@ services:
     #   file: hwaccel.ml.yml
     #   service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
-      - model-cache:/cache
+      - /pettan/cache/immich-model-cache:/cache
     env_file: /etc/.env/immich
     restart: always
     healthcheck:
@@ -59,8 +59,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE_NAME}
       POSTGRES_INITDB_ARGS: '--data-checksums'
-      # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
-      DB_STORAGE_TYPE: 'HDD'
+      DB_STORAGE_TYPE: 'SSD'
     env_file: /etc/.env/immich
 
     volumes:
@@ -68,6 +67,3 @@ services:
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
 
     restart: always
-
-volumes:
-  model-cache:

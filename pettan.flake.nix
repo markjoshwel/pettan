@@ -1,4 +1,5 @@
-# admonition: this is HARD linked to /etc/nixos/flake.nix!
+# admonition: /etc/nixos/flake.nix should be a symlink to this file.
+# Do not hardlink Git-managed files; Git checkouts can replace the inode.
 {
   description = "poissonparler server";
 
@@ -124,8 +125,8 @@
               after = [ "docker.service" ];
               serviceConfig = {
                 Type = "simple";
-                WorkingDirectory = "/mnt/md0";
-                ExecStart = "${pkgs.docker-compose}/bin/docker-compose up";
+                WorkingDirectory = "/pettan/self";
+                ExecStart = "${pkgs.docker-compose}/bin/docker-compose -p md0 -f compose.yaml up";
                 Restart = "always";
                 User = "poisson";
                 Group = "docker";

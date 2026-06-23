@@ -37,7 +37,7 @@ services:
       - "443:443/udp"
     volumes:
       - /mnt/md0/caddy/site:/srv
-      - /mnt/md0/caddy/data:/data
-      - /mnt/md0/caddy/config:/config
-      - /mnt/md0/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /pettan/data/caddy/data:/data
+      - /pettan/data/caddy/config:/config
+      - /pettan/data/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
     env_file: /etc/.env/caddy
