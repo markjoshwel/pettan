@@ -117,7 +117,7 @@
             virtualisation.docker.enable = true;
             virtualisation.docker.daemon.settings = {
               log-driver = "journald";
-              data-root = "/mnt/md0/docker";
+              data-root = "/pettan/docker";
             };
 
             systemd.services.start-pettan-docker = {
