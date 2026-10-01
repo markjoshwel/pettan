@@ -18,6 +18,9 @@
           {
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+            boot.kernelParams = [
+              "video=HDMI-A-1:1920x1080@60D"
+            ];
             boot.loader.systemd-boot.enable = true;
             boot.loader.systemd-boot.graceful = true;
             boot.loader.efi.canTouchEfiVariables = true;
@@ -25,7 +28,7 @@
             boot.swraid = {
               enable = true;
               mdadmConf = ''
-                ARRAY /dev/md0 metadata=1.2 UUID=9fad82ba:ce324086:a8334b2c:f03ca356
+                ARRAY /dev/md0 metadata=1.2 UUID=b25ffbf8:afb78588:153bda52:b7ea6732 name=pettan:0
               '';
             };
 
@@ -120,10 +123,16 @@
               data-root = "/pettan/docker";
             };
 
+            systemd.services.docker = {
+              overrideStrategy = "asDropin";
+              requires = [ "mnt-md0.mount" ];
+              after = [ "mnt-md0.mount" ];
+            };
+
             systemd.services.start-pettan-docker = {
               description = "start pettan docker";
-              wants = [ "docker.service" ];
-              after = [ "docker.service" ];
+              requires = [ "docker.service" "mnt-md0.mount" ];
+              after = [ "mnt-md0.mount" "docker.service" ];
               serviceConfig = {
                 Type = "simple";
                 WorkingDirectory = "/pettan/self";
@@ -137,6 +146,14 @@
 
             # no wireless networking; this is a server
             networking.hostName = "pettan";
+
+            # Static LAN address reserved for eno1 on the ONR.
+            networking.interfaces.eno1 = {
+              useDHCP = false;
+              ipv4.addresses = [ { address = "192.168.1.253"; prefixLength = 24; } ];
+            };
+            networking.defaultGateway = { address = "192.168.1.254"; interface = "eno1"; };
+            networking.nameservers = [ "192.168.1.254" ];
             time.timeZone = "Asia/Singapore";
 
             system.stateVersion =

@@ -30,8 +30,9 @@
     };
 
   fileSystems."/mnt/md0" =
-    { device = "/dev/md0";
+    { device = "/dev/disk/by-uuid/81c4a84e-8021-4231-b772-a675f9518cc6";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=10s" "x-systemd.mount-timeout=30s" ];
     };
 
   swapDevices = [ ];

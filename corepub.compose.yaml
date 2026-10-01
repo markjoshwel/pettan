@@ -39,5 +39,5 @@ services:
       - /mnt/md0/caddy/site:/srv
       - /pettan/data/caddy/data:/data
       - /pettan/data/caddy/config:/config
-      - /pettan/data/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /pettan/self/Caddyfile:/etc/caddy/Caddyfile:ro
     env_file: /etc/.env/caddy

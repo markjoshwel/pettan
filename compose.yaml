@@ -3,8 +3,10 @@ services:
     container_name: portainer
     image: 'portainer/portainer-ee:latest'
     ports:
-      - 9000:9000
-      - 9443:9443
+      - "192.168.1.253:9000:9000"
+      - "100.84.210.91:9000:9000"
+      - "192.168.1.253:9443:9443"
+      - "100.84.210.91:9443:9443"
     volumes:
       - /pettan/env:/etc/.env:ro
       - /etc/localtime:/etc/localtime:ro

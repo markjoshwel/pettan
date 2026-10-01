@@ -1,0 +1,118 @@
+{
+	email mark@joshwel.co
+	# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+forge.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy http://192.168.1.253:3000
+}
+
+arrange.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy http://192.168.1.253:4293
+}
+
+datashower.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy 192.168.1.253:7423
+}
+
+console.datashower.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy 192.168.1.253:7424
+}
+
+ccu.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy 192.168.1.253:12121
+	encode gzip
+}
+
+server.ccu.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy 192.168.1.253:12122
+}
+
+lo.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	respond "STILL IN LOVE"
+}
+
+status.scorchthinks.dev {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_SCORCH}
+		resolvers 1.1.1.1
+	}
+
+	redir https://status.joshwel.co permanent
+}
+
+i.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:3001
+	}
+}
+
+watch.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:8096
+	}
+}
+
+arr1.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:9696
+	}
+}
+
+arr2.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:8686
+	}
+}
+
+arr3.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:7878
+	}
+}
+
+arr4.scorchthinks.dev {
+	reverse_proxy {
+		to http://192.168.1.253:8989
+	}
+}
+
+sslr.scorchthinks.dev {
+	root * /srv/dda
+	file_server
+}
