@@ -1,0 +1,6 @@
+# Local credentials and configuration backups
+.env
+.env.*
+env/
+*.bak
+*.bak-*
