@@ -92,15 +92,15 @@ services:
     restart: unless-stopped
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
     init: true
     environment:
       - LOG_LEVEL=info
       - TZ=Asia/Singapore
       - PORT=5055
     volumes:
-      - /pettan/data/jellyseerr:/app/config
+      - /pettan/data/seerr:/app/config
     ports:
       - 5055:5055
     restart: unless-stopped
