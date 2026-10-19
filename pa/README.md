@@ -16,7 +16,7 @@ The absolute ClickHouse configuration paths refer to files on Pettan's host.
 Portainer already mounts `/pettan/env` at `/etc/.env`.
 
 The live stack is managed by Portainer as stack ID `115` on environment `2`:
-<http://100.84.210.91:9000/#!/2/docker/stacks/115?type=2&external=false>.
+<http://100.84.210.91:9000/#!/2/docker/stacks/pa?id=115&type=2&regular=true&orphaned=false&orphanedRunning=false>.
 Its Git source is `https://github.com/markjoshwel/pettan.git`, reference
 `refs/heads/main`, Compose path `pa.compose.yaml`. Use Portainer's Git
 redeploy action after updating the repository. Automatic updates are not
