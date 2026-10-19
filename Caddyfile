@@ -116,3 +116,28 @@ sslr.scorchthinks.dev {
 	root * /srv/dda
 	file_server
 }
+
+pa.joshwel.co {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_JOSHWEL}
+		resolvers 1.1.1.1
+	}
+
+	reverse_proxy pa:8000
+}
+
+pa.scorchthinks.dev {
+	tls {
+		dns cloudflare {env.SS_CLOUDFLARE_API_TOKEN_SCORCH}
+		resolvers 1.1.1.1
+	}
+
+	# Serve tracking on either domain; keep dashboard sessions on BASE_URL.
+	@tracker path /js/* /api/event
+	handle @tracker {
+		reverse_proxy pa:8000
+	}
+	handle {
+		redir https://pa.joshwel.co{uri} permanent
+	}
+}
