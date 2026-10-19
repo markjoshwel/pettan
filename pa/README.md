@@ -15,6 +15,13 @@ Deploy `/pettan/self/pa.compose.yaml` as a Docker Standalone stack named `pa`.
 The absolute ClickHouse configuration paths refer to files on Pettan's host.
 Portainer already mounts `/pettan/env` at `/etc/.env`.
 
+The live stack is managed by Portainer as stack ID `115` on environment `2`:
+<http://100.84.210.91:9000/#!/2/docker/stacks/115?type=2&external=false>.
+Its Git source is `https://github.com/markjoshwel/pettan.git`, reference
+`refs/heads/main`, Compose path `pa.compose.yaml`. Use Portainer's Git
+redeploy action after updating the repository. Automatic updates are not
+enabled. Management is restricted to administrators.
+
 Before deployment, create `/pettan/env/pa` with mode 600 containing:
 
 ```dotenv
@@ -33,9 +40,10 @@ static IP or another DDNS configuration entry.
 
 ## Manage from the host
 
-The initial deployment was started through Compose. It appears in Portainer
-as an external stack until imported there. The host has `/etc/.env` linked
-to `/pettan/env`, so the same Compose file works from either environment:
+Portainer adopted the initial Compose deployment without replacing the
+containers or volumes. Prefer Portainer for redeployment. The host has
+`/etc/.env` linked to `/pettan/env`, so the same Compose file also works for
+diagnostics or recovery from the host:
 
 ```sh
 docker compose -p pa -f /pettan/self/pa.compose.yaml up -d --wait
