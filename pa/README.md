@@ -31,6 +31,27 @@ Both DNS names are proxied CNAMEs targeting `forge.joshwel.co`, whose A record
 is maintained by Pettan's existing DDNS container. This avoids a separate
 static IP or another DDNS configuration entry.
 
+## Manage from the host
+
+The initial deployment was started through Compose. It appears in Portainer
+as an external stack until imported there. The host has `/etc/.env` linked
+to `/pettan/env`, so the same Compose file works from either environment:
+
+```sh
+docker compose -p pa -f /pettan/self/pa.compose.yaml up -d --wait
+docker compose -p pa -f /pettan/self/pa.compose.yaml ps
+```
+
+After editing Caddy's config, validate it and reload from standard input:
+
+```sh
+docker exec -i proxy caddy validate --config - --adapter caddyfile < /pettan/self/Caddyfile
+docker exec -i proxy caddy reload --config - --adapter caddyfile < /pettan/self/Caddyfile
+```
+
+Reading from standard input also works after Git replaces the host's
+Caddyfile inode, before the container is next recreated.
+
 The ClickHouse XML files are copied unchanged from
 <https://github.com/plausible/community-edition/tree/v3.2.1/clickhouse>.
 They reduce memory usage and log volume for a small instance.
